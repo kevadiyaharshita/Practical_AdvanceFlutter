@@ -18,16 +18,19 @@ class HomePage extends StatelessWidget {
     double w = s.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text("YouTube"),
+        title: Text(
+          "YouTube",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.white,
         leading: Container(
           height: 20,
           width: 20,
           decoration: BoxDecoration(
-              // color: Colors.pink,
-              image: DecorationImage(
-                  image: NetworkImage(
-                      'https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-512.png'),
-                  fit: BoxFit.cover)),
+            // color: Colors.pink,
+            image: DecorationImage(
+                image: AssetImage('assets/images/logo.png'), fit: BoxFit.cover),
+          ),
         ),
         actions: [
           IconButton(
@@ -41,7 +44,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(5, 16, 5, 16),
+        padding: EdgeInsets.fromLTRB(0, 16, 5, 0),
         child: Center(
           child: Consumer<YoutubeController>(builder: (context, p, _) {
             return SingleChildScrollView(

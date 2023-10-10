@@ -13,7 +13,7 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(18),
+        padding: EdgeInsets.fromLTRB(0, 16, 5, 0),
         child: Center(
           child: Consumer<YoutubeController>(builder: (context, p, _) {
             return Column(
