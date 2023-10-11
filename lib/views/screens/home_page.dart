@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:practical_advanceflutter/controller/Youtube_Controller.dart';
@@ -18,11 +19,15 @@ class HomePage extends StatelessWidget {
     double w = s.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "YouTube",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        title: Transform.scale(
+          scaleY: 1.8,
+          child: Text(
+            "YouTube",
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, letterSpacing: -0.8),
+          ),
         ),
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         leading: Container(
           height: 20,
           width: 20,
@@ -44,7 +49,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(0, 16, 5, 0),
+        padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
         child: Center(
           child: Consumer<YoutubeController>(builder: (context, p, _) {
             return SingleChildScrollView(
@@ -63,14 +68,175 @@ class HomePage extends StatelessWidget {
                                       YoutubePlayer(
                                         controller: pro.intit_Controller(
                                             id: p.ym![index].id),
+                                        bottomActions: [
+                                          CurrentPosition(),
+                                          ProgressBar(isExpanded: true),
+                                          PlayPauseButton(),
+                                          PlaybackSpeedButton(),
+                                          FullScreenButton(
+
+                                              // controller: pro.getContoller,
+                                              ),
+                                        ],
                                         showVideoProgressIndicator: true,
+                                        progressIndicatorColor: Colors.red,
+                                        progressColors: ProgressBarColors(
+                                            playedColor: Colors.red,
+                                            bufferedColor: Colors.grey,
+                                            backgroundColor:
+                                                Colors.grey.withOpacity(0.5),
+                                            handleColor: Colors.red),
                                       ),
                                       Gap(5),
-                                      Text(
-                                        "${p.ym![index].title}",
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(fontSize: 16),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              child: Text(
+                                                "${p.ym![index].title}",
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(fontSize: 16),
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            child: IconButton(
+                                              onPressed: () {
+                                                showModalBottomSheet(
+                                                  context: context,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                  ),
+                                                  builder: (context) =>
+                                                      Container(
+                                                    height: 350,
+                                                    width: w,
+                                                    padding: EdgeInsets.all(18),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                    ),
+                                                    child: Column(
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            Icon(
+                                                              Icons
+                                                                  .queue_music_rounded,
+                                                              // size: 30,
+                                                            ),
+                                                            Gap(25),
+                                                            Text(
+                                                              "Play next in queue",
+                                                              style: TextStyle(
+                                                                  fontSize: 18),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Gap(20),
+                                                        Row(
+                                                          children: [
+                                                            Icon(
+                                                              Icons.access_time,
+                                                              // size: 30,
+                                                            ),
+                                                            Gap(25),
+                                                            Text(
+                                                              "Svae to watch later",
+                                                              style: TextStyle(
+                                                                  fontSize: 18),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Gap(20),
+                                                        Row(
+                                                          children: [
+                                                            Icon(
+                                                              Icons
+                                                                  .folder_special_rounded,
+                                                              // size: 30,
+                                                            ),
+                                                            Gap(25),
+                                                            Text(
+                                                              "Svae to plalist",
+                                                              style: TextStyle(
+                                                                  fontSize: 18),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Gap(20),
+                                                        Row(
+                                                          children: [
+                                                            Icon(CupertinoIcons
+                                                                    .share
+                                                                // size: 30,
+                                                                ),
+                                                            Gap(25),
+                                                            Text(
+                                                              "Share",
+                                                              style: TextStyle(
+                                                                  fontSize: 18),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Gap(20),
+                                                        Row(
+                                                          children: [
+                                                            Icon(Icons
+                                                                    .not_interested
+                                                                // size: 30,
+                                                                ),
+                                                            Gap(25),
+                                                            Text(
+                                                              "Not interested",
+                                                              style: TextStyle(
+                                                                  fontSize: 18),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Gap(20),
+                                                        Row(
+                                                          children: [
+                                                            Icon(CupertinoIcons
+                                                                    .person_crop_circle_badge_xmark
+                                                                // size: 30,
+                                                                ),
+                                                            Gap(25),
+                                                            Text(
+                                                              "Not interested",
+                                                              style: TextStyle(
+                                                                  fontSize: 18),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Gap(20),
+                                                        Row(
+                                                          children: [
+                                                            Icon(CupertinoIcons
+                                                                    .flag_fill
+                                                                // size: 30,
+                                                                ),
+                                                            Gap(25),
+                                                            Text(
+                                                              "Report",
+                                                              style: TextStyle(
+                                                                  fontSize: 18),
+                                                            )
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              icon: Icon(Icons.more_vert),
+                                            ),
+                                          ),
+                                        ],
                                       )
                                     ],
                                   ),
